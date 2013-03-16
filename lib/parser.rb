@@ -13,4 +13,18 @@ class Parser
       end
     bash_array
   end
+
+  def self.peroshki
+    peroshki_array = []
+    page = Nokogiri::HTML(open("http://www.perashki.ru/piro/all?sort=2&page=1"))
+    quote_array = page.css('div.PiroEntry')
+    p quote_array.css('div.PiroEntry').length
+    quote_array.each do |quote|
+        perojok = {external_id: quote.attr('id'), content: quote.css('div.PiroBox div.TextContainer div.Text').text, external_time: Time.parse(quote.css('div.PiroBox div.TextContainer div.Author span').last.text)    }
+        peroshki_array.push(perojok)
+    end
+    peroshki_array
+
+    end
+
 end
