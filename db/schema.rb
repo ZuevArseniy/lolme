@@ -11,13 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316203735) do
+ActiveRecord::Schema.define(:version => 20130316211325) do
 
-  create_table "quotes", :force => true do |t|
-    t.text     "body"
-    t.integer  "bash_id"
+  create_table "images", :force => true do |t|
+    t.integer  "source_id"
+    t.string   "external_id"
+    t.string   "src"
+    t.datetime "external_time"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "images", ["external_id"], :name => "images_external_id"
+  add_index "images", ["source_id"], :name => "images_source_id"
+
+  create_table "sources", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "texts", :force => true do |t|
+    t.integer  "source_id"
+    t.string   "external_id"
+    t.text     "content"
+    t.datetime "external_time"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end
