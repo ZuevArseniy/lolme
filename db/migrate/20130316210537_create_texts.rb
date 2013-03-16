@@ -7,5 +7,7 @@ class CreateTexts < ActiveRecord::Migration
       t.datetime :external_time
       t.timestamps
     end
+    add_index :texts, :source_id, :name => "texts_source_id"
+    add_index :texts, :external_id, :name => "texts_external_id"
   end
 end
