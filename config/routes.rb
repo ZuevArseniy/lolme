@@ -25,6 +25,8 @@ Lolme::Application.routes.draw do
   #     end
   #   end
 
+  root to: 'magics#index'
+  resources :magics, only: [:index]
   # Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
